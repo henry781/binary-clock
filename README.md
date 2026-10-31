@@ -3,6 +3,8 @@
 [![CI](https://github.com/henry781/binary-clock/actions/workflows/ci.yml/badge.svg)](https://github.com/henry781/binary-clock/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+![3D render of the assembled board](docs/images/pcb-3d-iso.png)
+
 A wall clock that shows the time in pure binary on 17 LEDs. It keeps time
 with a 32.768 kHz watch crystal, sets itself from the DCF77 radio time
 signal and dims its LEDs with the light of the room. Through-hole parts
@@ -69,6 +71,16 @@ microcontroller dims them all at once by switching the buffers' output
 enable at 488 Hz with a duty cycle that follows the room light. When a
 DCF77 time is confirmed, the firmware reloads the counters and re-aligns
 the phase of its seconds on the top of the minute.
+
+## The board
+
+| 3D render, front | PCB layout (front and back copper) |
+|:---:|:---:|
+| ![3D render of the front of the board](docs/images/pcb-3d-front.png) | ![PCB layout, front and back copper with silkscreen](docs/images/pcb-layout.png) |
+
+Rendered from the KiCad project with `kicad-cli pcb render` and
+`kicad-cli pcb export svg`. The 3D model shows every LED in red; on the
+real clock the minutes are green and the seconds blue.
 
 ## Repository layout
 
