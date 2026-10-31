@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  firmware:
+    name: Firmware build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the AVR toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gcc-avr binutils-avr avr-libc
+
+      - name: Build option variants
+        run: |
+          make -C firmware EXTRA_CFLAGS=-Werror VERBOSE_TICK=1 DCF77_DEBUG_PULSES=1
+          make -C firmware EXTRA_CFLAGS=-Werror DCF77_ENABLED=0
+          make -C firmware EXTRA_CFLAGS=-Werror DEBUG_UART_ENABLED=0
+          make -C firmware EXTRA_CFLAGS=-Werror BRIGHT_CURVE=0
+          make -C firmware EXTRA_CFLAGS=-Werror BRIGHT_CURVE=2
+
+      - name: Build bring-up sketches
+        run: make -C firmware EXTRA_CFLAGS=-Werror tools
+
+      - name: Build the default firmware
+        run: make -C firmware EXTRA_CFLAGS=-Werror
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: binary_clock-hex
+          path: firmware/build/binary_clock.hex
+
+  decoder:
+    name: DCF77 decoder tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run the regression suite
+        run: make -C firmware/test test

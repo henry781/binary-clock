@@ -1,0 +1,26 @@
+# KiCad
+*-backups/
+*.kicad_prl
+_autosave-*
+\#auto_saved_files#
+*-bak
+*.lck
+fp-info-cache
+
+# Fabrication outputs (generated from the KiCad project)
+hardware/production/
+
+# Firmware build outputs
+firmware/build/
+firmware/test/dcf77_sim
+
+# Python
+__pycache__/
+
+# Drift measurement logs (firmware/tools/drift_log.py)
+drift.csv
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

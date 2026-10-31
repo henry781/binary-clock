@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "binary_clock")(type "KiCad")(uri "${KIPRJMOD}/binary_clock.kicad_sym")(options "")(descr "Project symbols (DCF77 receiver module)"))
+)

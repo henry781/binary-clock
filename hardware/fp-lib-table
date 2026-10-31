@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "binary_clock")(type "KiCad")(uri "${KIPRJMOD}/binary_clock.pretty")(options "")(descr "Project footprints (DCF77 castellated module)"))
+)
